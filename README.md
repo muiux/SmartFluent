@@ -25,6 +25,30 @@ The system consists of the following parts:
 - The backend tracks and stores this data in the MySQL database.
 - On the admin side, visit [http://172.86.112.235:5173](http://172.86.112.235:5173) to view the traffic history and detect anomalies in the visitor patterns.
 
+## Project Overview
+
+The MySQL database is structured as follows:
+
+```
+CREATE TABLE Visit (
+    id         INT AUTO_INCREMENT PRIMARY KEY,
+    ipAddress  VARCHAR(45) NOT NULL,
+    pageUrl    TEXT NOT NULL,
+    visitDate  DATETIME DEFAULT CURRENT_TIMESTAMP,
+    referrer   TEXT NULL,
+    userAgent  TEXT NULL
+);
+```
+
+### Schema Explanation
+
+- `id` (`INT AUTO_INCREMENT PRIMARY KEY`) – Unique identifier for each visit.
+- `ipAddress` (`VARCHAR(45) NOT NULL`) – Stores the visitor’s IP address (supports IPv6).
+- `pageUrl` (`TEXT NOT NULL`) – The URL of the visited page.
+- `visitDate` (`DATETIME DEFAULT CURRENT_TIMESTAMP`) – Timestamp of the visit.
+- `referrer` (`TEXT NULL`) – Referring URL, if available.
+- `userAgent` (`TEXT NULL`) – The visitor’s browser user-agent string.
+
 ### Summary
 
 - **Standalone Test Project (Customer Side Simulation):** [http://172.86.112.235:3000](http://172.86.112.235:3000)
