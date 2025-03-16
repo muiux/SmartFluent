@@ -55,7 +55,6 @@ const TrafficView: React.FC = () => {
       mutationFn: (date: DateRange | undefined) => getAnomalyDetection(date),
       onSuccess: (data: AnomalyData) => {
         setAnomalyData(data);
-        console.log(data)
       },
     });
 

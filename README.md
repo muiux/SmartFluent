@@ -1,6 +1,6 @@
 # SmartFluent - Website Traffic Tracker
 
-This project is a website traffic tracker that allows for the tracking and analysis of visitor data. To make the testing process easier, the project is set up on a VPS server.
+This project is a website traffic tracker that enables the tracking and analysis of visitor data. To simplify the testing process, the project is hosted on a VPS server. The VPS IP address is 172.86.112.235. I have already set up the following three projects on the VPS server, allowing you to see how web tracking works in action.
 
 ## Project Overview
 
@@ -56,3 +56,5 @@ CREATE TABLE Visit (
 - **Admin Panel:** [http://172.86.112.235:5173](http://172.86.112.235:5173)
 
 This setup allows for easy testing and provides a clear way to monitor website traffic and anomalies.
+
+Here is the URL for the codebase walkthrough video: https://jmp.sh/RGFYFCge.
