@@ -23,7 +23,7 @@ git clone git@github.com:muiux/SmartFluent.git
 ### Navigate to the backend folder:
 
 ```bash
-cd ./backend
+cd ./SmartFluent/backend
 ```
 
 ### Install dependencies:

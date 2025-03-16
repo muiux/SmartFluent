@@ -18,7 +18,7 @@ git clone git@github.com:muiux/SmartFluent.git
 ### Navigate to the test project folder:
 
 ```bash
-cd ./test-project
+cd ./SmartFluent/test-project
 ```
 
 ### Install dependencies:

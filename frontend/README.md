@@ -18,7 +18,7 @@ git clone git@github.com:muiux/SmartFluent.git
 ### Navigate to the frontend folder:
 
 ```bash
-cd ./frontend
+cd ./SmartFluent/frontend
 ```
 
 ### Install dependencies:
