@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import trafficRepository from "../repositories/traffic.repository";
 import { VisitStatsParams, TrackVisitParams, VisitStats } from "../types/traffic.types";
+import { detectAnomalies } from "../utils/anomalyDetection.utils";
 
 export default class TrafficController {
   async trackVisit(req: Request, res: Response): Promise<void> {
@@ -37,6 +38,32 @@ export default class TrafficController {
       res.status(200).send(uniqueVisitors);
     } catch (err) {
       res.status(500).send({ message: "Error retrieving unique visitors." });
+    }
+  }
+
+  async detectAnomalies(req: Request, res: Response): Promise<void> {
+    const { startDate, endDate } = req.query;
+
+    if (!startDate || !endDate) {
+      res.status(400).send({ message: 'startDate and endDate are required!' });
+      return;
+    }
+
+    try {
+      const trafficData = await trafficRepository.getTrafficData({
+        startDate: startDate as string,
+        endDate: endDate as string,
+      });
+
+      const anomalies = await detectAnomalies(trafficData);
+
+      if (anomalies.length > 0) {
+        res.status(200).send({ message: 'Anomalies detected', anomalies });
+      } else {
+        res.status(200).send({ message: 'No anomalies detected' });
+      }
+    } catch (err) {
+      res.status(500).send({ message: 'Error detecting anomalies.' });
     }
   }
 }

@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/popover";
 import { useTrafficContext } from "@/contexts/TrafficContext";
 
-export function DatePicker({
+export function DateRangePicker({
   className,
 }: React.HTMLAttributes<HTMLDivElement>) {
   const { date, setDate } = useTrafficContext();

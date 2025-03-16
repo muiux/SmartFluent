@@ -1,9 +1,4 @@
-import mysql from "mysql2";
-import dbConfig from "../config/db.config";
+import { PrismaClient } from "@prisma/client";
 
-export default mysql.createConnection({
-  host: dbConfig.HOST,
-  user: dbConfig.USER,
-  database: dbConfig.DB,
-  connectionLimit: 10
-});
+const prisma = new PrismaClient();
+export default prisma;

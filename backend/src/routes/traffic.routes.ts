@@ -13,6 +13,8 @@ class TrafficRoutes {
     this.router.post("/track", this.controller.trackVisit);
 
     this.router.get("/unique-visitors", this.controller.getUniqueVisitors);
+
+    this.router.get('/detect-anomalies', this.controller.detectAnomalies);
   }
 }
 

@@ -3,6 +3,11 @@ export interface VisitStats {
   pageUrl: string;
 }
 
+export interface TrafficStats {
+  count: number;
+  visitDate: string;
+}
+
 export interface VisitStatsParams {
   startDate: string;
   endDate: string;

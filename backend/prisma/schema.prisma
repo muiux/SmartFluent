@@ -1,0 +1,17 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Visit {
+  id         Int      @id @default(autoincrement())
+  ipAddress  String
+  pageUrl    String
+  visitDate  DateTime @default(now())
+  referrer   String?
+  userAgent  String?
+}
