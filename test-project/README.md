@@ -1,53 +1,42 @@
-# Next.js & HeroUI Template
+# SmartFluent Test Project
 
-This is a template for creating applications using Next.js 14 (app directory) and HeroUI (v2).
+This is the test project for SmartFluent, built with Next.js and TypeScript.
 
-[Try it on CodeSandbox](https://githubbox.com/heroui-inc/heroui/next-app-template)
+## Prerequisites
 
-## Technologies Used
+- Node.js (version 18 or higher)
+- npm (Node package manager)
 
-- [Next.js 14](https://nextjs.org/docs/getting-started)
-- [HeroUI v2](https://heroui.com/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Tailwind Variants](https://tailwind-variants.org)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Framer Motion](https://www.framer.com/motion/)
-- [next-themes](https://github.com/pacocoursey/next-themes)
+## Setup
 
-## How to Use
-
-### Use the template with create-next-app
-
-To create a new project based on this template using `create-next-app`, run the following command:
+### Clone the repository:
 
 ```bash
-npx create-next-app -e https://github.com/heroui-inc/next-app-template
+git clone git@github.com:muiux/SmartFluent.git
 ```
 
-### Install dependencies
+### Navigate to the test project folder:
 
-You can use one of them `npm`, `yarn`, `pnpm`, `bun`, Example using `npm`:
+```bash
+cd ./test-project
+```
+
+### Install dependencies:
 
 ```bash
 npm install
 ```
 
-### Run the development server
+### Create a `.env.local` file:
+
+Copy the content of `.env.local.example` into a new `.env.local` file. Change the content according to your server configuration.
+
+### Start the development server:
 
 ```bash
 npm run dev
 ```
 
-### Setup pnpm (optional)
+## Running the Test Project
 
-If you are using `pnpm`, you need to add the following code to your `.npmrc` file:
-
-```bash
-public-hoist-pattern[]=*@heroui/*
-```
-
-After modifying the `.npmrc` file, you need to run `pnpm install` again to ensure that the dependencies are installed correctly.
-
-## License
-
-Licensed under the [MIT license](https://github.com/heroui-inc/next-app-template/blob/main/LICENSE).
+You can view the running test project at: http://172.86.112.235:3000
