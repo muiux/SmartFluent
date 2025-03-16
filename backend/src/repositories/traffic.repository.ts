@@ -1,57 +1,41 @@
-import { ResultSetHeader, RowDataPacket } from "mysql2";
-import connection from "../db";
-import {
-  TrackVisitParams,
-  VisitStats,
-  VisitStatsParams,
-} from "../types/traffic.types";
+import prisma from "../db";
+import { TrackVisitParams, VisitStatsParams, TrafficStats, VisitStats } from "../types/traffic.types";
 
-interface ITrafficRepository {
-  trackVisit({ ipAddress, pageUrl, referrer, userAgent }: TrackVisitParams): Promise<void>;
-  getUniqueVisitors({
-    startDate,
-    endDate,
-  }: VisitStatsParams): Promise<VisitStats[]>;
-}
-
-class TrafficRepository implements ITrafficRepository {
+class TrafficRepository {
   async trackVisit({ ipAddress, pageUrl, referrer, userAgent }: TrackVisitParams): Promise<void> {
-    return new Promise((resolve, reject) => {
-      connection.query<ResultSetHeader>(
-        `INSERT INTO visits (ip_address, page_url, visit_date, referrer, user_agent)
-         VALUES (?, ?, NOW(), ?, ?)`,
-        [ipAddress, pageUrl, referrer, userAgent],
-        (err) => {
-          if (err) reject(err);
-          else resolve();
-        }
-      );
+    await prisma.visit.create({
+      data: { ipAddress, pageUrl, referrer, userAgent }
     });
   }
 
-  async getUniqueVisitors({
-    startDate,
-    endDate,
-  }: VisitStatsParams): Promise<VisitStats[]> {
-    return new Promise((resolve, reject) => {
-      connection.query<RowDataPacket[]>(
-        `SELECT page_url, COUNT(DISTINCT ip_address) AS count
-         FROM visits 
-         WHERE visit_date BETWEEN ? AND ?
-         GROUP BY page_url`,
-        [`${startDate} 00:00:00`, `${endDate} 00:00:00`],
-        (err, res) => {
-          if (err) reject(err);
-          else {
-            const visitStats: VisitStats[] = res.map((row) => ({
-              pageUrl: row.page_url,
-              count: row.count,
-            }));
-            resolve(visitStats);
-          }
-        }
-      );
+  async getUniqueVisitors({ startDate, endDate }: VisitStatsParams): Promise<VisitStats[]> {
+    const res = await prisma.visit.groupBy({
+      by: ["pageUrl"],
+      _count: { ipAddress: true },
+      where: {
+        visitDate: { gte: new Date(startDate), lte: new Date(endDate) }
+      }
     });
+
+    return res.map((row: { pageUrl: string; _count: { ipAddress: number } }) => ({
+      pageUrl: row.pageUrl,
+      count: row._count.ipAddress
+    }));
+  }
+
+  async getTrafficData({ startDate, endDate }: VisitStatsParams): Promise<TrafficStats[]> {
+    const res = await prisma.visit.groupBy({
+      by: ["visitDate"],
+      _count: { ipAddress: true },
+      where: {
+        visitDate: { gte: new Date(startDate), lte: new Date(endDate) }
+      }
+    });
+
+    return res.map((row: { visitDate: Date; _count: { ipAddress: number } }) => ({
+      visitDate: row.visitDate.toISOString(),
+      count: row._count.ipAddress
+    }));
   }
 }
 

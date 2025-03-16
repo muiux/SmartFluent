@@ -1,7 +1,6 @@
 import "@/styles/globals.css";
 import { Metadata, Viewport } from "next";
 import clsx from "clsx";
-import Script from "next/script";
 
 import { Providers } from "./providers";
 
@@ -49,7 +48,6 @@ export default function RootLayout({
             </main>
           </div>
         </Providers>
-        <Script src="/js/tracker.js" strategy="afterInteractive" />
       </body>
     </html>
   );
