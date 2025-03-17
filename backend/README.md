@@ -36,6 +36,12 @@ npm install
 
 Copy the content of `.env.example` into a new `.env` file. Change the content according to your MySQL configuration.
 
+### Database Configuration:
+
+```bash
+npm run build-db-config
+```
+
 ### Run Prisma migrations:
 
 ```bash
