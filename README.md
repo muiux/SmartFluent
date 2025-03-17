@@ -25,7 +25,7 @@ The system consists of the following parts:
 - The backend tracks and stores this data in the MySQL database.
 - On the admin side, visit [http://172.86.112.235:5173](http://172.86.112.235:5173) to view the traffic history and detect anomalies in the visitor patterns.
 
-## Project Overview
+## Schema Overview
 
 The MySQL database is structured as follows:
 
